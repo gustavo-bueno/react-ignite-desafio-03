@@ -42,16 +42,16 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     return [];
   });
 
-  const previousCart = useRef<Product[]>();
+  const previousCartRef = useRef<Product[]>();
 
   useEffect(() => {
-    previousCart.current = cart;
+    previousCartRef.current = cart;
   });
 
-  const boatarde = previousCart.current ?? cart;
+  const previousCartValue = previousCartRef.current ?? cart;
 
   useEffect(() => {
-    if (boatarde !== cart) {
+    if (previousCartValue !== cart) {
       localStorage.setItem('@RocketShoes:cart', JSON.stringify(cart));
     }
   }, [cart]);
